@@ -6,7 +6,7 @@ fn match_pattern(input_line: &str, pattern: &str) -> bool {
     match pattern {
         "\\d" => input_line.chars().any(|c| c.is_digit(10)),
         _ => {
-            false
+            true
         }
     }
 }
