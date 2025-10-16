@@ -11,7 +11,7 @@ fn match_pattern(input_line: &str, pattern: &str) -> bool {
         "\\d" => input_line.chars().any(|c| c.is_digit(10)),
         "\\w" => {
             for c in input_line.chars() {
-                if c.is_alphabetic() || c.is_alphanumeric() {
+                if c.is_alphabetic() || c.is_alphanumeric() || c == '_' {
                     return true
                 }
             }
