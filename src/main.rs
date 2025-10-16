@@ -9,6 +9,7 @@ fn match_pattern(input_line: &str, pattern: &str) -> bool {
 
     match pattern {
         "\\d" => input_line.chars().any(|c| c.is_digit(10)),
+        "\\w" => input_line.chars().all(|c| c.is_digit(10) || c.is_ascii_alphabetic() || c == '_') ,
         _ => {
             panic!("Unhandled pattern: {}", pattern)
         },
@@ -28,8 +29,10 @@ fn main() {
     io::stdin().read_line(&mut input_line).unwrap();
 
     if match_pattern(&input_line, &pattern) {
+        println!("0");
         process::exit(0)
     } else {
+        println!("1");
         process::exit(1)
     }
 }
