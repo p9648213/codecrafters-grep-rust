@@ -9,7 +9,14 @@ fn match_pattern(input_line: &str, pattern: &str) -> bool {
 
     match pattern {
         "\\d" => input_line.chars().any(|c| c.is_digit(10)),
-        "\\w" => input_line.chars().all(|c| c.is_digit(10) || c.is_ascii_alphabetic() || c == '_') ,
+        "\\w" => {
+            for c in input_line.chars() {
+                if c.is_alphabetic() || c.is_alphanumeric() {
+                    return true
+                }
+            }
+            return false
+        },
         _ => {
             panic!("Unhandled pattern: {}", pattern)
         },
