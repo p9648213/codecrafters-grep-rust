@@ -12,14 +12,18 @@ fn match_pattern(input_line: &str, pattern: &str) -> bool {
         "\\w" => {
             for c in input_line.chars() {
                 if c.is_alphabetic() || c.is_alphanumeric() || c == '_' {
-                    return true
+                    return true;
                 }
             }
-            return false
-        },
+            return false;
+        }
+        _ if pattern.starts_with('[') && pattern.ends_with(']') => {
+            let chars_inside = &pattern[1..pattern.len() - 1];
+            input_line.chars().any(|c| chars_inside.contains(c))
+        }
         _ => {
             panic!("Unhandled pattern: {}", pattern)
-        },
+        }
     }
 }
 
