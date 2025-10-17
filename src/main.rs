@@ -17,6 +17,10 @@ fn match_pattern(input_line: &str, pattern: &str) -> bool {
             }
             return false;
         }
+        _ if pattern.starts_with("[^") && pattern.ends_with(']') => {
+            let chars_inside = &pattern[2..pattern.len() - 1];
+            input_line.chars().any(|c| !chars_inside.contains(c))
+        }
         _ if pattern.starts_with('[') && pattern.ends_with(']') => {
             let chars_inside = &pattern[1..pattern.len() - 1];
             input_line.chars().any(|c| chars_inside.contains(c))
